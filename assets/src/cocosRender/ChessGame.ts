@@ -20,6 +20,7 @@ import { ChessEngine, RenderSnapshot } from "../cheesCore/engine";
 import { ChessPiece } from "./ChessPiece";
 import { drawBoardLines, BoardLayout } from "./ChessBoardDrawer";
 import { PieceSide, UpdateResult } from "../cheesCore/types";
+import bgFit from "./bgFit";
 
 const { ccclass } = _decorator;
 
@@ -60,6 +61,15 @@ export class ChessGame extends Component {
 
 	// ============ 生命周期 ============
 	onLoad() {
+		let bgFitCom = this.node.getComponent(bgFit);
+		if (!bgFitCom) {
+			bgFitCom = this.node.addComponent(bgFit);
+		}
+		const ui = this.node.getComponent(UITransform);
+		bgFitCom._orHeight = ui.height;
+		bgFitCom._orWidth = ui.width;
+		bgFitCom._orScaleX = 1;
+		bgFitCom._orScaleY = 1;
 		this.engine = new ChessEngine();
 		this.attachEvents();
 		this.initUI(); // 自动创建 UI 层级
