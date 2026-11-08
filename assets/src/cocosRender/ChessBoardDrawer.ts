@@ -16,11 +16,9 @@ export function drawBoardLines(g: Graphics, layout: BoardLayout) {
 	const { left, top, cellSize: cs } = layout;
 	const right = left + 8 * cs;
 	const bottom = top - 9 * cs;
-
 	g.clear();
 	g.lineWidth = 2;
 	g.strokeColor = new Color(40, 30, 20, 255); // 古风深褐色线条
-
 	// 1. 画 10 条横线
 	for (let i = 0; i <= 9; i++) {
 		const y = top - i * cs;
